@@ -85,7 +85,7 @@ $libreria_2 = [
         [
             "titulo" => "Los pilares de la tierra",
             "autor" => "Ken Follet",
-            "genero" => "Histórico"
+            "genero" => "Misterio"
         ],
         [
             "titulo" => "Millenium",
@@ -99,3 +99,28 @@ $libreria_2 = [
         ]
     ]
 ];
+
+// 1º Obtener los títulos de los libros de cada librería
+$titulos_libreria = array_column($libreria['libros'], 'titulo');
+$titulos_libreria_2 = array_column($libreria_2['libros'], 'titulo');
+
+$titulos = array_merge($titulos_libreria, $titulos_libreria_2);
+
+$cantidad_repeticiones_titulos = [];
+
+foreach ($titulos as $titulo) {
+
+    if (!array_key_exists($titulo, $cantidad_repeticiones_titulos)) {
+
+        $cantidad_repeticiones_titulos[$titulo] = 1;
+    } else {
+
+        $cantidad_repeticiones_titulos[$titulo] += 1;
+    }
+}
+
+$titulos_unicos = array_filter($cantidad_repeticiones_titulos, fn ($cantidad) => $cantidad === 1);
+
+// var_dump(array_keys($titulos_unicos));
+
+// Agrupar los libros por género
