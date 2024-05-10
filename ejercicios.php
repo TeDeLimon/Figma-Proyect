@@ -124,3 +124,19 @@ $titulos_unicos = array_filter($cantidad_repeticiones_titulos, fn ($cantidad) =>
 // var_dump(array_keys($titulos_unicos));
 
 // Agrupar los libros por género
+
+$libros = array_merge($libreria['libros'], $libreria_2['libros']);
+
+$generos = array_column($libros, 'genero');
+
+$generos_unicos = array_unique($generos);
+
+$libros_por_genero = [];
+
+foreach($generos_unicos as $genero) {
+
+    $libros_por_genero[$genero] = array_filter($libros, fn ($libro) => $libro['genero'] === $genero);
+}
+
+var_dump($libros_por_genero);
+
